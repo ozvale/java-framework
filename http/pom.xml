@@ -11,6 +11,7 @@
 
     <artifactId>http</artifactId>
     <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
     <modules>
         <module>http-base</module>
     </modules>

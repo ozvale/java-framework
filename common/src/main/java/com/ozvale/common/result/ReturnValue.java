@@ -49,8 +49,27 @@ public class ReturnValue<T> {
         this.value = value;
     }
 
+
+    public ReturnValue<T> success() {
+        this.setSuccess(true);
+        return this;
+    }
+
     public ReturnValue<T> fail() {
         this.setSuccess(false);
+        return this;
+    }
+
+    public ReturnValue<T> reset() {
+        this.setException(null);
+        this.setError(null);
+        this.setValue(null);
+        this.setSuccess(true);
+        return this;
+    }
+
+    public ReturnValue<T> value(T value) {
+        this.setValue(value);
         return this;
     }
 
@@ -61,14 +80,13 @@ public class ReturnValue<T> {
     }
 
     public ReturnValue<T> error(ReturnValue returnValue) {
-        this.setException(returnValue.getException());
-        this.setError(returnValue.getError());
+        if (returnValue.getException() != null) {
+            exception(returnValue.getException());
+        }
+        if (returnValue.getError() != null) {
+            error(returnValue.getError());
+        }
         this.setSuccess(false);
-        return this;
-    }
-
-    public ReturnValue<T> value(T value) {
-        this.setValue(value);
         return this;
     }
 
@@ -76,9 +94,15 @@ public class ReturnValue<T> {
         if (exception == null) return this;
         this.setException(exception);
         if (this.getError() == null) {
-            this.setError(exception.getMessage());
+            if (exception.getMessage() == null) {
+                this.setError(exception.toString());
+            } else {
+                this.setError(exception.getMessage());
+            }
         }
         this.setSuccess(false);
         return this;
     }
+
+
 }

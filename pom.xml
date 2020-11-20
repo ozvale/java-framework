@@ -13,8 +13,8 @@
     </properties>
     <modules>
         <module>http</module>
-        <module>java-extension</module>
         <module>common</module>
+        <module>mongodb-support</module>
     </modules>
     <dependencies>
         <dependency>
@@ -32,6 +32,7 @@
         </dependency>
     </dependencies>
     <build>
+        <finalName>ozvale-${project.artifactId}-${project.version}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
